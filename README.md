@@ -3,7 +3,7 @@
 <p>
   I'm a <b>Computer Engineering student at NTU Singapore</b>, currently interning on <b>Google's Data Center team</b> managing GCP production infrastructure.<br/><br/>
   Previously at AMD building internal data platforms and developer tooling. I also run a <b>6-node self-hosted Proxmox + Kubernetes cluster</b> at home, because the best way to understand how things break is to break them yourself.<br/><br/>
-  Looking for <b>Cloud Engineering, SRE, and Platform Engineering</b> roles from May 2027.
+  Looking for <b>Cloud Engineering, SRE, Physical AI,  Platform and Inference Engineering</b> roles from Jan 2027.
 </p>
 
 <h3>Things I work with</h3>
