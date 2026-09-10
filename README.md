@@ -1,36 +1,50 @@
-<h1>Hey, I'm Ray 👋</h1>
+<div align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=38BDF8&center=true&vCenter=true&random=false&width=660&height=50&lines=Ray+Shao+%7C+Systems+%26+Cloud+Infrastructure;Google+Data+Center+Intern+%7C+GCP+Fleet+Operations;Ex-AMD+Data+Center+Group+%7C+MI350%2F400+Telemetry;Self-Hosted+AMD+EPYC+%2B+MI50+Bare-Metal;Multi-GPU+Cluster+Roadmap+%2B+Tesla+V100s;Bridging+Cloud+Infrastructure+to+Robot+Fleets" alt="Typing Banner" />
+</div>
+
+<br/>
+
+<pre>
+╭─── ray@datacenter-edge [~] ─────────────────────────────────────────────────────────╮
+│ OS:        Proxmox VE (Debian Trixie) [Kernel: PREEMPT_DYNAMIC + cgroup-v2]         │
+│ Host:      Jonsbo N5 Hyperconverged Node (Air-Cooled Bare-Metal)                    │
+│ CPU:       AMD EPYC 7F52 @ 3.90 GHz (16 Cores / 32 Threads, SP3)                   │
+│ GPU:       AMD Radeon Instinct MI50 32GB HBM2 [Power-capped 150W]                   │
+│ Roadmap:   + NVIDIA Tesla V100s (Transitioning to Multi-GPU Tensor Parallelism)     │
+│ Storage:   Tier-0: 2x NVMe (LVM Hot) | Tier-1: 2x Enterprise HDD (LVM Cold)         │
+│ Fabric:    10G SFP+ Multi-VLAN L2/L3 Segregated | Nginx PM Reverse Proxy            │
+│ Telemetry: Telegraf ──► InfluxDB ──► Grafana (Live Full-Stack SLI/SLO Dashboards)   │
+│ Workloads: Qwen 3.6 35B (custom ROCm/llama.cpp) · Hermes Agent VMs · NTU Club VM    │
+╰─────────────────────────────────────────────────────────────────────────────────────╯
+</pre>
 
 <p>
   I'm a <b>Computer Engineering student at NTU Singapore</b>, currently interning on <b>Google's Data Center team</b> managing GCP production infrastructure.<br/><br/>
-  Previously at AMD building internal data platforms and developer tooling. I also run a <b>self-hosted AMD EPYC + MI50 hyperconverged infrastructure</b> on Proxmox VE at home, because the best way to understand how systems break is to break them yourself.<br/><br/>
-  Looking for <b>Cloud Engineering, SRE, Physical AI, Platform and Inference Engineering</b> roles from 2027.
+  Previously at AMD building internal data platforms and developer tooling for next-gen datacenter accelerators. Off the clock, I run a <b>self-hosted AMD EPYC + MI50 hyperconverged infrastructure</b> on Proxmox VE at home, because the best way to understand how systems break is to break them yourself.<br/><br/>
+  Founder & President of the <b>NTU Semiconductor Club</b> (400+ members). Looking for <b>Cloud Engineering, SRE, Physical AI, Platform and Inference Engineering</b> roles from 2027.
 </p>
 
-<pre><strong>$ cat ~/infrastructure/spec.yaml</strong>
-apiVersion: platform.ray/v1
-kind: SystemsEngineer
-metadata:
-  name: ray
-  status: "Google Data Center Intern (GCP Infra) | NTU Singapore"
-spec:
-  hardware:
-    host: "Single-node Hyperconverged Infrastructure (HCI) on Proxmox VE"
-    cpu: "AMD EPYC 7F52 (16-Core / 32-Thread, SP3)"
-    gpu: "AMD Radeon Instinct MI50 32GB HBM2 (ROCm)"
-    storage: "Tiered LVM (2x NVMe hot tier + 2x HDD cold tier)"
-    
-  production:
-    current: "Managing GCP Production Infrastructure @ Google Data Center"
-    previous: "Internal Data Platforms & Developer Tooling @ AMD"
-  seeking: "Cloud Engineering / SRE / Inference Platform roles (2027)"
-</pre>
+---
 
-<details>
-  <summary><b>🖥️ Homelab Hyperconverged Infrastructure & Hardware Specs (Click to expand)</b></summary>
+<details open>
+  <summary><h3><code>$ pvesh get /nodes/ray/specs --verbose</code> // Bare-Metal Homelab & Cluster Evolution</h3></summary>
 
 <br/>
 
 > **Platform Overview:** Single-node enterprise hyperconverged infrastructure (HCI) running Proxmox VE (Debian Trixie base) on an AMD EPYC server with strict `cgroup v2` resource isolation, two-tier storage, and full-stack observability.
+
+```text
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│        PROXMOX HYPERCONVERGED ARCHITECTURE (AMD EPYC 7F52 · 16C/32T)             │
+├──────────────────────────────┬─────────────────────────────┬─────────────────────┤
+│ ACCELERATOR COMPUTE          │ STORAGE & NETWORK FABRIC    │ ISOLATION & KERNEL  │
+│ • AMD Instinct MI50 32GB     │ • Tier-0: 2x NVMe (Hot)     │ • PREEMPT_DYNAMIC   │
+│ • [Planned: +Tesla V100s]    │ • Tier-1: 2x HDD (Cold)     │ • cgroup v2 QoS     │
+│ • Qwen 3.6 35B (custom ROCm) │ • 10G SFP+ Multi-VLAN       │ • ~40% Toil Cut     │
+├──────────────────────────────┴─────────────────────────────┴─────────────────────┤
+│ CO-RESIDENT TENANTS: InfluxDB/Grafana · Nginx PM · Nextcloud · Hermes AI · NTU VM│
+└──────────────────────────────────────────────────────────────────────────────────┘
+```
 
 #### Hardware Architecture
 
@@ -38,10 +52,11 @@ spec:
 | :--- | :--- | :--- |
 | <b>CPU</b> | AMD EPYC 7F52 | 16-Core / 32-Thread (up to 3.9 GHz boost, SP3 socket) |
 | <b>GPU Accelerator</b> | AMD Radeon Instinct MI50 | 32 GB HBM2 (ROCm, power-capped to 150W via `amd-smi`) |
-| <b>Chassis & Cooling</b> | Jonsbo N5 | Server chassis, air cooling |
+| <b>Chassis & Cooling</b> | Jonsbo N5 | Dense server chassis, high-static-pressure air cooling |
 | <b>Storage (Hot Tier)</b> | 2× NVMe SSD (LVM) | High-IOPS root filesystems & latency-critical services |
 | <b>Storage (Cold Tier)</b>| 2× Enterprise HDD (LVM)| Bulk archival storage, automated backups, and datasets |
-| <b>Networking</b> | Multi-VLAN L2/L3 10G SFP+ | Segregated management, DMZ, and internal tenant VLANs |
+| <b>Networking</b> | Multi-VLAN L2/L3 (10G SFP+) | Segregated management, DMZ, and internal tenant VLANs |
+| <b>Kernel / Scheduling</b>| `PREEMPT_DYNAMIC` + `cgroup v2` | Hard CPU/RAM limits per tenant to eliminate noisy-neighbor interference |
 
 #### Live Co-Resident Workloads & Tenants
 
@@ -69,29 +84,79 @@ spec:
 <br/>
 </details>
 
-<h3>Things I work with</h3>
-<p>
-  <img alt="GCP" src="https://img.shields.io/badge/-Google_Cloud-4285F4?style=flat-square&logo=google-cloud&logoColor=white" />
-  <img alt="Proxmox" src="https://img.shields.io/badge/-Proxmox_VE-E57000?style=flat-square&logo=proxmox&logoColor=white" />
-  <img alt="Kubernetes" src="https://img.shields.io/badge/-Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white" />
-  <img alt="Docker" src="https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white" />
-  <img alt="Terraform" src="https://img.shields.io/badge/-Terraform-7B42BC?style=flat-square&logo=terraform&logoColor=white" />
-  <img alt="Prometheus" src="https://img.shields.io/badge/-Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white" />
-  <img alt="Grafana" src="https://img.shields.io/badge/-Grafana-F46800?style=flat-square&logo=grafana&logoColor=white" />
-  <img alt="GitHub Actions" src="https://img.shields.io/badge/-GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white" />
-  <img alt="Python" src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" />
-  <img alt="Linux" src="https://img.shields.io/badge/-Linux-FCC624?style=flat-square&logo=linux&logoColor=black" />
-  <img alt="FastAPI" src="https://img.shields.io/badge/-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" />
-  <img alt="PyTorch" src="https://img.shields.io/badge/-PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" />
-  <img alt="ROCm" src="https://img.shields.io/badge/-AMD_ROCm-ED1C24?style=flat-square&logo=amd&logoColor=white" />
-  <img alt="ROS 2" src="https://img.shields.io/badge/-ROS_2-22314E?style=flat-square&logo=ros&logoColor=white" />
-  <img alt="BigQuery" src="https://img.shields.io/badge/-BigQuery-4285F4?style=flat-square&logo=google-cloud&logoColor=white" />
-  <img alt="React" src="https://img.shields.io/badge/-React-45b8d8?style=flat-square&logo=react&logoColor=white" />
-  <img alt="C++" src="https://img.shields.io/badge/-C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white" />
-  <img alt="Git" src="https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white" />
-</p>
+<details>
+  <summary><h3><code>$ ./show_pipeline.sh --end-to-end</code> // Cloud-to-Robot Physical AI Through-Line</h3></summary>
 
-<h3>Projects</h3>
+<br/>
+
+```text
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                       THE CLOUD-TO-ROBOT PHYSICAL AI PIPELINE                 │
+└───────────────────────────────────────┬───────────────────────────────────────┘
+                                        ▼
+┌──────────────────────────────┐  Kinesthetic   ┌───────────────────────────────┐
+│ KINESTHETIC COLLECTION       │  Teleoperation │ DISTRIBUTED CLUSTER TRAINING  │
+│ • 6-DoF Piper Robotic Arm    │ ─────────────► │ • Multi-Node (SLURM/k8s/Docker│
+│ • CAN Bus Telemetry Stream   │                │ • VLASH-Forge Framework       │
+│ • LeRobot Dataset Versioning │                │ • 8GB VRAM floor (QLoRA)      │
+└──────────────────────────────┘                └───────────────┬───────────────┘
+                                                                │ Optimized
+                                TensorRT Compilation & FP16     │ Weights
+                                29.5x Latency Reduction         ▼
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ LOW-LATENCY EMBEDDED EDGE INFERENCE (Jetson AGX Orin)                         │
+│ • π₀.₅ Vision-Language-Action (VLA) Model deployed on-robot                   │
+│ • 184.5ms inference loop sustaining 30 Hz real-time closed-loop control       │
+│ • Pick-and-place success lifted from 5% baseline to 65% on live hardware      │
+└───────────────────────────────────────────────────────────────────────────────┘
+```
+
+<br/>
+</details>
+
+---
+
+### Tech Stack & Operational Tooling
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <b>☁️ Cloud & Platform Infrastructure</b><br/>
+      <img alt="GCP" src="https://img.shields.io/badge/-Google_Cloud-4285F4?style=flat-square&logo=google-cloud&logoColor=white" />
+      <img alt="Proxmox" src="https://img.shields.io/badge/-Proxmox_VE-E57000?style=flat-square&logo=proxmox&logoColor=white" />
+      <img alt="Kubernetes" src="https://img.shields.io/badge/-Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white" />
+      <img alt="Docker" src="https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white" />
+      <img alt="Terraform" src="https://img.shields.io/badge/-Terraform-7B42BC?style=flat-square&logo=terraform&logoColor=white" />
+      <br/><br/>
+      <b>⚡ Accelerators & Hardware Platforms</b><br/>
+      <img alt="AMD EPYC" src="https://img.shields.io/badge/-AMD_EPYC-ED1C24?style=flat-square&logo=amd&logoColor=white" />
+      <img alt="ROCm" src="https://img.shields.io/badge/-AMD_ROCm-ED1C24?style=flat-square&logo=amd&logoColor=white" />
+      <img alt="CUDA" src="https://img.shields.io/badge/-NVIDIA_CUDA-76B900?style=flat-square&logo=nvidia&logoColor=white" />
+      <img alt="Jetson" src="https://img.shields.io/badge/-Jetson_Orin-76B900?style=flat-square&logo=nvidia&logoColor=white" />
+    </td>
+    <td width="50%" valign="top">
+      <b>📊 SRE, Observability & Core OS</b><br/>
+      <img alt="Prometheus" src="https://img.shields.io/badge/-Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white" />
+      <img alt="Grafana" src="https://img.shields.io/badge/-Grafana-F46800?style=flat-square&logo=grafana&logoColor=white" />
+      <img alt="Linux" src="https://img.shields.io/badge/-Linux-FCC624?style=flat-square&logo=linux&logoColor=black" />
+      <img alt="GitHub Actions" src="https://img.shields.io/badge/-GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white" />
+      <img alt="Git" src="https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white" />
+      <br/><br/>
+      <b>🤖 Physical AI & Systems Engineering</b><br/>
+      <img alt="PyTorch" src="https://img.shields.io/badge/-PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" />
+      <img alt="ROS 2" src="https://img.shields.io/badge/-ROS_2-22314E?style=flat-square&logo=ros&logoColor=white" />
+      <img alt="FastAPI" src="https://img.shields.io/badge/-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" />
+      <img alt="BigQuery" src="https://img.shields.io/badge/-BigQuery-4285F4?style=flat-square&logo=google-cloud&logoColor=white" />
+      <img alt="C++" src="https://img.shields.io/badge/-C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white" />
+      <img alt="Python" src="https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white" />
+    </td>
+  </tr>
+</table>
+
+---
+
+### Featured Projects
+
 <table>
   <thead align="center">
     <tr>
@@ -136,6 +201,10 @@ spec:
 
 <br/>
 
+---
+
+### Activity Graph
+
 <div align="center">
   <picture>
     <source srcset="dist/github-snake-dark.svg" media="(prefers-color-scheme: dark)">
@@ -146,10 +215,16 @@ spec:
 
 <br/>
 
-<h3>Where to find me</h3>
-<p>
+---
+
+### Connect
+
+<p align="center">
   <a href="https://github.com/frieddeli" target="_blank"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-%2312100E.svg?&style=for-the-badge&logo=github&logoColor=white" /></a>
+  &nbsp;
   <a href="https://linkedin.com/in/ray-shao" target="_blank"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+  &nbsp;
   <a href="mailto:yshao004@e.ntu.edu.sg"><img alt="Email" src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+  &nbsp;
   <a href="https://frieddeli.github.io/Portfolio-Website/" target="_blank"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-%23000000.svg?&style=for-the-badge&logo=firefox&logoColor=white" /></a>
 </p>
