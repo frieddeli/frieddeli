@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=2500&pause=600&color=38BDF8&center=true&vCenter=true&random=false&width=650&height=50&lines=hey%2C%20i%27m%20ray%20%F0%9F%91%8B;welcome%20to%20my%20workshop;%27things%20are%20only%20impossible%20until%20they%27re%20not.%27%20%E2%80%94%20picard;breaking%20bare-metal%20locally%20so%20prod%20stays%20up;hunting%20for%20tesla%20v100s%20in%20the%20delta%20quadrant;%27make%20it%20so.%27%20%F0%9F%96%96" alt="Typing Banner" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&duration=2500&pause=600&color=38BDF8&center=true&vCenter=true&random=false&width=860&height=70&lines=hey%2C%20i%27m%20ray%20%F0%9F%91%8B;welcome%20to%20my%20workshop;%27things%20are%20only%20impossible%20until%20they%27re%20not.%27%20%F0%9F%96%96;breaking%20bare-metal%20locally%20so%20prod%20stays%20up;hunting%20for%20tesla%20v100s%20in%20the%20delta%20quadrant;%27make%20it%20so.%27%20%E2%80%94%20captain%20picard" alt="Typing Banner" />
 </div>
 
 <br/>
