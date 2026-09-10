@@ -48,34 +48,36 @@
 
 #### Hardware Architecture
 
-| Component | Specification | Details / Role |
-| :--- | :--- | :--- |
-| <b>CPU</b> | AMD EPYC 7F52 | 16-Core / 32-Thread (up to 3.9 GHz boost, SP3 socket) |
-| <b>GPU Accelerator</b> | AMD Radeon Instinct MI50 | 32 GB HBM2 (ROCm, power-capped to 150W via `amd-smi`) |
-| <b>Chassis & Cooling</b> | Jonsbo N5 | Dense server chassis, high-static-pressure air cooling |
-| <b>Storage (Hot Tier)</b> | 2× NVMe SSD (LVM) | High-IOPS root filesystems & latency-critical services |
-| <b>Storage (Cold Tier)</b>| 2× Enterprise HDD (LVM)| Bulk archival storage, automated backups, and datasets |
-| <b>Networking</b> | Multi-VLAN L2/L3 (10G SFP+) | Segregated management, DMZ, and internal tenant VLANs |
-| <b>Kernel / Scheduling</b>| `PREEMPT_DYNAMIC` + `cgroup v2` | Hard CPU/RAM limits per tenant to eliminate noisy-neighbor interference |
+| Component                  | Specification                       | Details / Role                                                          |
+| :------------------------- | :---------------------------------- | :---------------------------------------------------------------------- |
+| <b>CPU</b>                 | AMD EPYC 7F52                       | 16-Core / 32-Thread (up to 3.9 GHz boost, SP3 socket)                   |
+| <b>GPU Accelerator</b>     | AMD Radeon Instinct MI50            | 32 GB HBM2 (ROCm, power-capped to 150W via`amd-smi`)                  |
+| <b>Chassis & Cooling</b>   | Jonsbo N5                           | Dense chassis                                                           |
+| <b>Storage (Hot Tier)</b>  | 2× NVMe SSD (LVM)                  | High-IOPS root filesystems & latency-critical services                  |
+| <b>Storage (Cold Tier)</b> | 2× Enterprise HDD (LVM)            | Bulk archival storage, automated backups, and datasets                  |
+| <b>Networking</b>          | Multi-VLAN L2/L3 (10G SFP+)         | Segregated management, DMZ, and internal tenant VLANs                   |
+| <b>Kernel / Scheduling</b> | `PREEMPT_DYNAMIC` + `cgroup v2` | Hard CPU/RAM limits per tenant to eliminate noisy-neighbor interference |
 
 #### Live Co-Resident Workloads & Tenants
 
-| Service Class | Environment | Workload & Implementation Details |
-| :--- | :--- | :--- |
-| <b>GPU Inference</b> | Bare-metal LXC | **Qwen 3.6 35B** served via custom-compiled ROCm/llama.cpp build targeting Vega 20 (gfx906) |
-| <b>Observability</b> | LXC / Docker | **Telegraf → InfluxDB → Grafana** monitoring CPU, GPU, memory, disk I/O, and network |
-| <b>Reverse Proxy</b> | LXC / Docker | **Nginx Proxy Manager** with SSL termination and VLAN routing |
-| <b>Object Storage</b> | LXC / VM | **Nextcloud** self-hosted sync and storage |
-| <b>Cloud Dev Machine</b> | KVM VM | Isolated remote development environment |
-| <b>Agent Workloads</b> | KVM VM | **Hermes** autonomous-agent VMs (GDG Singapore workshop infrastructure) |
-| <b>Community Infra</b> | KVM VM | Hosting for **NTU Semiconductor Club** (400+ student organization) |
+| Service Class            | Environment    | Workload & Implementation Details                                                                 |
+| :----------------------- | :------------- | :------------------------------------------------------------------------------------------------ |
+| <b>GPU Inference</b>     | Bare-metal LXC | **Qwen 3.6 35B** served via custom-compiled ROCm/llama.cpp build targeting Vega 20 (gfx906) |
+| <b>Observability</b>     | LXC / Docker   | **Telegraf → InfluxDB → Grafana** monitoring CPU, GPU, memory, disk I/O, and network      |
+| <b>Reverse Proxy</b>     | LXC / Docker   | **Nginx Proxy Manager** with SSL termination and VLAN routing                               |
+| <b>Object Storage</b>    | LXC / VM       | **Nextcloud** self-hosted sync and storage                                                  |
+| <b>Cloud Dev Machine</b> | KVM VM         | Isolated remote development environment                                                           |
+| <b>Agent Workloads</b>   | KVM VM         | **Hermes** autonomous-agent VMs (GDG Singapore workshop infrastructure)                     |
+| <b>Community Infra</b>   | KVM VM         | Hosting for**NTU Semiconductor Club** (400+ student organization)                           |
 
 #### SRE & Reliability Highlights
+
 * **Toil Reduction (~40%):** Automated backup scheduling, automated log rotation, and self-healing service health checks via Bash and cron.
 * **SLO-Driven Observability:** Telegraf metrics streamed to InfluxDB with Grafana dashboards for proactive capacity planning and incident detection.
 * **Network Fault Isolation:** Systematic packet-level diagnosis (`tcpdump`, `traceroute`, `netstat`) across segmented VLAN boundaries.
 
 #### Cluster Roadmap & Hardware Evolution (In Progress)
+
 * 🚀 **Multi-GPU Cluster Expansion:** Procuring enterprise accelerators (e.g., **NVIDIA Tesla V100s** / multi-GPU dense compute) to transition from single-accelerator testing to a proper multi-GPU cluster supporting distributed tensor parallelism and CUDA vs. ROCm comparative benchmarking.
 * ☸️ **Declarative k3s Orchestration:** Redeploying a production k3s cluster provisioned entirely via **Terraform** and **Ansible** (reproducible IaC), migrating containerized inference workloads onto Kubernetes.
 * 📈 **Inference-Native Autoscaling:** Implementing custom metrics-driven autoscaling for vLLM pods using Prometheus metrics (KV-cache saturation, queue depth `num_requests_waiting`, and P99 TTFT) rather than naive CPU/memory thresholds.
@@ -221,10 +223,10 @@
 
 <p align="center">
   <a href="https://github.com/frieddeli" target="_blank"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-%2312100E.svg?&style=for-the-badge&logo=github&logoColor=white" /></a>
-  &nbsp;
+   
   <a href="https://linkedin.com/in/ray-shao" target="_blank"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-  &nbsp;
+   
   <a href="mailto:yshao004@e.ntu.edu.sg"><img alt="Email" src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-  &nbsp;
+   
   <a href="https://frieddeli.github.io/Portfolio-Website/" target="_blank"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-%23000000.svg?&style=for-the-badge&logo=firefox&logoColor=white" /></a>
 </p>
