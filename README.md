@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=26&pause=1500&color=38BDF8&center=true&vCenter=true&random=false&width=450&height=50&lines=hey%2C+i'm+ray+%F0%9F%91%8B;welcome+to+my+workshop" alt="Typing Banner" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1200&color=38BDF8&center=true&vCenter=true&random=false&width=650&height=50&lines=hey%2C%20i%27m%20ray%20%F0%9F%91%8B;welcome%20to%20my%20workshop;%27things%20are%20only%20impossible%20until%20they%27re%20not.%27%20%E2%80%94%20picard;breaking%20bare-metal%20locally%20so%20prod%20stays%20up;hunting%20for%20tesla%20v100s%20in%20the%20delta%20quadrant;%27make%20it%20so.%27%20%F0%9F%96%96" alt="Typing Banner" />
 </div>
 
 <br/>
@@ -7,7 +7,7 @@
 <pre>
 ╭─── ray@homelab [~] ─────────────────────────────────────────────────────────────╮
 │ $ cat about.me                                                                  │
-│ I'm a Computer Engineering student at NTU Singapore, currently interning on    │
+│ I'm a Computer Engineering student at NTU Singapore, currently interning on     │
 │ Google's Data Center team managing GCP production infrastructure.               │
 │                                                                                 │
 │ Previously at AMD. Off the clock, I run a self-hosted AMD EPYC + MI50 server in │
@@ -17,7 +17,10 @@
 │ Founder & President of the NTU Semiconductor Club (400+ members).               │
 │                                                                                 │
 │ $ cat looking-for.txt                                                           │
-│ Cloud Engineering, SRE, Physical AI, Platform & Inference Engineering (2027)   │
+│ Cloud Engineering, SRE, Physical AI, Platform & Inference Engineering (2027)    │
+│                                                                                 │
+│ $ fortune star-trek                                                             │
+│ "Things are only impossible until they're not." — Captain Picard                │
 ╰─────────────────────────────────────────────────────────────────────────────────╯
 </pre>
 
