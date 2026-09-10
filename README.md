@@ -1,28 +1,25 @@
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=38BDF8&center=true&vCenter=true&random=false&width=660&height=50&lines=Ray+Shao+%7C+Systems+%26+Cloud+Infrastructure;Google+Data+Center+Intern+%7C+GCP+Fleet+Operations;Ex-AMD+Data+Center+Group+%7C+MI350%2F400+Telemetry;Self-Hosted+AMD+EPYC+%2B+MI50+Bare-Metal;Multi-GPU+Cluster+Roadmap+%2B+Tesla+V100s;Bridging+Cloud+Infrastructure+to+Robot+Fleets" alt="Typing Banner" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=26&pause=1500&color=38BDF8&center=true&vCenter=true&random=false&width=450&height=50&lines=hey%2C+i'm+ray+%F0%9F%91%8B;welcome+to+my+workshop" alt="Typing Banner" />
 </div>
 
 <br/>
 
 <pre>
-╭─── ray@datacenter-edge [~] ─────────────────────────────────────────────────────────╮
-│ OS:        Proxmox VE (Debian Trixie) [Kernel: PREEMPT_DYNAMIC + cgroup-v2]         │
-│ Host:      Jonsbo N5 Hyperconverged Node (Air-Cooled Bare-Metal)                    │
-│ CPU:       AMD EPYC 7F52 @ 3.90 GHz (16 Cores / 32 Threads, SP3)                   │
-│ GPU:       AMD Radeon Instinct MI50 32GB HBM2 [Power-capped 150W]                   │
-│ Roadmap:   + NVIDIA Tesla V100s (Transitioning to Multi-GPU Tensor Parallelism)     │
-│ Storage:   Tier-0: 2x NVMe (LVM Hot) | Tier-1: 2x Enterprise HDD (LVM Cold)         │
-│ Fabric:    10G SFP+ Multi-VLAN L2/L3 Segregated | Nginx PM Reverse Proxy            │
-│ Telemetry: Telegraf ──► InfluxDB ──► Grafana (Live Full-Stack SLI/SLO Dashboards)   │
-│ Workloads: Qwen 3.6 35B (custom ROCm/llama.cpp) · Hermes Agent VMs · NTU Club VM    │
-╰─────────────────────────────────────────────────────────────────────────────────────╯
+╭─── ray@homelab [~] ─────────────────────────────────────────────────────────────╮
+│ $ cat about.me                                                                  │
+│ I'm a Computer Engineering student at NTU Singapore, currently interning on    │
+│ Google's Data Center team managing GCP production infrastructure.               │
+│                                                                                 │
+│ Previously at AMD. Off the clock, I run a self-hosted AMD EPYC + MI50 server in │
+│ my room (hunting for used Tesla V100s to make this a proper cluster).           │
+│ The best way to understand how systems break is to break them yourself.         │
+│                                                                                 │
+│ Founder & President of the NTU Semiconductor Club (400+ members).               │
+│                                                                                 │
+│ $ cat looking-for.txt                                                           │
+│ Cloud Engineering, SRE, Physical AI, Platform & Inference Engineering (2027)   │
+╰─────────────────────────────────────────────────────────────────────────────────╯
 </pre>
-
-<p>
-  I'm a <b>Computer Engineering student at NTU Singapore</b>, currently interning on <b>Google's Data Center team</b> managing GCP production infrastructure.<br/><br/>
-  Previously at AMD building internal data platforms and developer tooling for next-gen datacenter accelerators. Off the clock, I run a <b>self-hosted AMD EPYC + MI50 hyperconverged infrastructure</b> on Proxmox VE at home, because the best way to understand how systems break is to break them yourself.<br/><br/>
-  Founder & President of the <b>NTU Semiconductor Club</b> (400+ members). Looking for <b>Cloud Engineering, SRE, Physical AI, Platform and Inference Engineering</b> roles from 2027.
-</p>
 
 ---
 
