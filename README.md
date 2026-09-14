@@ -1,8 +1,8 @@
 <h1>Hey, I'm Ray 👋</h1>
 
 <p>
-  I'm a <b>Computer Engineering student at NTU Singapore</b>, currently interning on <b>Google's Data Center team</b> managing GCP production infrastructure.<br/><br/>
-  Previously at AMD building internal data platforms and developer tooling. I also run a <b>6-node self-hosted Proxmox + Kubernetes cluster</b> at home, because the best way to understand how things break is to break them yourself.<br/><br/>
+  I'm a <b>Computer Engineering student at NTU Singapore</b>, currently interning on <b>Xiaomi's Big Data SRE team</b>.<br/><br/>
+  Previously at Google's Data Center team managing GCP production infrastructure, and before that at AMD building internal data platforms and developer tooling. I also run a <b>6-node self-hosted Proxmox + Kubernetes cluster</b> at home, because the best way to understand how things break is to break them yourself.<br/><br/>
   Looking for <b>Cloud Engineering, SRE, and Platform Engineering</b> roles from May 2027.
 </p>
 
