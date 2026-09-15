@@ -40,8 +40,8 @@
 ├──────────────────────────────┬─────────────────────────────┬─────────────────────┤
 │ ACCELERATOR COMPUTE          │ STORAGE & NETWORK FABRIC    │ ISOLATION & KERNEL  │
 │ • AMD Instinct MI50 32GB     │ • Tier-0: 2x NVMe (Hot)     │ • PREEMPT_DYNAMIC   │
-│ • [Planned: +Tesla V100s]    │ • Tier-1: 2x HDD (Cold)     │ • cgroup v2 QoS     │
-│ • Qwen 3.6 35B (custom ROCm) │ • 10G SFP+ Multi-VLAN       │ • ~40% Toil Cut     │
+│ • AMD Radeon RX 6900 XT 16GB │ • Tier-1: 2x HDD (Cold)     │ • cgroup v2 QoS     │
+│ • Heterogeneous ROCm TP=2    │ • 10G SFP+ Multi-VLAN       │ • ~40% Toil Cut     │
 ├──────────────────────────────┴─────────────────────────────┴─────────────────────┤
 │ CO-RESIDENT TENANTS: InfluxDB/Grafana · Nginx PM · Nextcloud · Hermes AI · NTU VM│
 └──────────────────────────────────────────────────────────────────────────────────┘
@@ -52,8 +52,8 @@
 | Component                  | Specification                       | Details / Role                                                          |
 | :------------------------- | :---------------------------------- | :---------------------------------------------------------------------- |
 | <b>CPU</b>                 | AMD EPYC 7F52                       | 16-Core / 32-Thread (up to 3.9 GHz boost, SP3 socket)                   |
-| <b>GPU Accelerator</b>     | AMD Radeon Instinct MI50            | 32 GB HBM2 (ROCm, power-capped to 150W via`amd-smi`)                  |
-| <b>Chassis & Cooling</b>   | Jonsbo N5                           | Dense chassis                                                           |
+| <b>GPU Accelerators</b>    | AMD Instinct MI50 (32GB HBM2) + Radeon RX 6900 XT (16GB GDDR6) | Heterogeneous TP=2 compute pool over PCIe 4.0 (custom multi-target RCCL) |
+| <b>Chassis & Cooling</b>   | Jonsbo N5                           | Dense chassis with custom Delta blower induction for passive MI50       |
 | <b>Storage (Hot Tier)</b>  | 2× NVMe SSD (LVM)                  | High-IOPS root filesystems & latency-critical services                  |
 | <b>Storage (Cold Tier)</b> | 2× Enterprise HDD (LVM)            | Bulk archival storage, automated backups, and datasets                  |
 | <b>Networking</b>          | Multi-VLAN L2/L3 (10G SFP+)         | Segregated management, DMZ, and internal tenant VLANs                   |
@@ -63,7 +63,7 @@
 
 | Service Class            | Environment    | Workload & Implementation Details                                                                 |
 | :----------------------- | :------------- | :------------------------------------------------------------------------------------------------ |
-| <b>GPU Inference</b>     | Bare-metal LXC | **Qwen 3.6 35B** served via custom-compiled ROCm/llama.cpp build targeting Vega 20 (gfx906) |
+| <b>GPU Inference</b>     | Bare-metal LXC | **Heterogeneous vLLM TP=2** (189.26 tok/s peak on Qwen 3 8B) + standalone MI50 (422.8 tok/s on Qwen 2.5 1.5B) |
 | <b>Observability</b>     | LXC / Docker   | **Telegraf → InfluxDB → Grafana** monitoring CPU, GPU, memory, disk I/O, and network      |
 | <b>Reverse Proxy</b>     | LXC / Docker   | **Nginx Proxy Manager** with SSL termination and VLAN routing                               |
 | <b>Object Storage</b>    | LXC / VM       | **Nextcloud** self-hosted sync and storage                                                  |
@@ -172,6 +172,20 @@
   </thead>
   <tbody>
     <tr>
+      <td><a href="https://github.com/frieddeli/heterogeneous-rocm-tensor-parallelism"><b>Heterogeneous ROCm TP=2 Engine</b></a><br/><i>Cross-generational AMD Tensor Parallelism bridging Instinct MI50 (GCN 5.1, 32GB HBM2) and Radeon RX 6900 XT (RDNA 2, 16GB GDDR6) over PCIe 4.0; custom multi-target RCCL fatbins, 64KB LDS Triton attention patch, 189.26 tok/s peak throughput.<br/>📖 <b>Deep Dives:</b> <a href="https://frieddeli.github.io/Portfolio-Website/#/blog/b5">MSN-014</a> · <a href="https://frieddeli.github.io/Portfolio-Website/#/blog/b6">MSN-015</a> · <a href="https://frieddeli.github.io/Portfolio-Website/#/blog/b7">MSN-016</a></i></td>
+      <td><img alt="Stars" src="https://img.shields.io/github/stars/frieddeli/heterogeneous-rocm-tensor-parallelism?style=flat-square&labelColor=343b41"/></td>
+      <td><img alt="Forks" src="https://img.shields.io/github/forks/frieddeli/heterogeneous-rocm-tensor-parallelism?style=flat-square&labelColor=343b41"/></td>
+      <td><img alt="Issues" src="https://img.shields.io/github/issues/frieddeli/heterogeneous-rocm-tensor-parallelism?style=flat-square&labelColor=343b41"/></td>
+      <td><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/frieddeli/heterogeneous-rocm-tensor-parallelism?style=flat-square&labelColor=343b41"/></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/frieddeli/mi50-vllm-rocm-runtime"><b>MI50 vLLM ROCm Runtime & LXC Suite</b></a><br/><i>Continuous batching inference runtime for retired AMD Instinct MI50 in unprivileged Proxmox LXC containers; 422.8 tok/s saturating 88.6% of 1,024 GB/s HBM2 memory bandwidth.<br/>📖 <b>Deep Dive:</b> <a href="https://frieddeli.github.io/Portfolio-Website/#/blog/b4">Build Log MSN-013</a></i></td>
+      <td><img alt="Stars" src="https://img.shields.io/github/stars/frieddeli/mi50-vllm-rocm-runtime?style=flat-square&labelColor=343b41"/></td>
+      <td><img alt="Forks" src="https://img.shields.io/github/forks/frieddeli/mi50-vllm-rocm-runtime?style=flat-square&labelColor=343b41"/></td>
+      <td><img alt="Issues" src="https://img.shields.io/github/issues/frieddeli/mi50-vllm-rocm-runtime?style=flat-square&labelColor=343b41"/></td>
+      <td><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/frieddeli/mi50-vllm-rocm-runtime?style=flat-square&labelColor=343b41"/></td>
+    </tr>
+    <tr>
       <td><a href="https://github.com/Alvin0523/vlash-piper"><b>VLASH-Piper</b></a><br/><i>First known π₀.₅ deployment on Jetson AGX Orin; 29.5× latency reduction via async VLA inference, lifting pick-and-place success from 5% to 65%</i></td>
       <td><img alt="Stars" src="https://img.shields.io/github/stars/Alvin0523/vlash-piper?style=flat-square&labelColor=343b41"/></td>
       <td><img alt="Forks" src="https://img.shields.io/github/forks/Alvin0523/vlash-piper?style=flat-square&labelColor=343b41"/></td>
@@ -201,6 +215,24 @@
     </tr>
   </tbody>
 </table>
+
+<br/>
+
+---
+
+### 📝 Engineering Logs & Technical Deep Dives
+
+Low-level kernel surgery notes, hardware bring-up logs, and microarchitecture analyses from my [personal portfolio & terminal](https://frieddeli.github.io/Portfolio-Website/):
+
+| Log | Build File | Architectural Focus & Key Findings | Read Time |
+| :--- | :--- | :--- | :--- |
+| **MSN-016** | [b7](https://frieddeli.github.io/Portfolio-Website/#/blog/b7) | [Concurrency Benchmarks Across Qwen 3 8B and Gemma 4: 189 tok/s over PCIe 4.0](https://frieddeli.github.io/Portfolio-Website/#/blog/b7)<br/>*16-client Poisson load testing, TTFT/TPOT latency percentiles, and Prometheus/Grafana ROCm exporter telemetry.* | 10 min |
+| **MSN-015** | [b6](https://frieddeli.github.io/Portfolio-Website/#/blog/b6) | [The 64KB LDS Trap and MoE Stragglers: Low-Level ROCm Kernel Surgery](https://frieddeli.github.io/Portfolio-Website/#/blog/b6)<br/>*Fixing Triton attention 1,024-byte LDS overflows on Gemma 4 ($d_{\text{head}}=256$) and mathematical modeling of MoE straggler bubbles.* | 16 min |
+| **MSN-014** | [b5](https://frieddeli.github.io/Portfolio-Website/#/blog/b5) | [Breaking Artificial Segmentation: Heterogeneous AMD Tensor Parallelism on MI50 + RX 6900 XT](https://frieddeli.github.io/Portfolio-Website/#/blog/b5)<br/>*Bypassing AMD vendor segmentation to run cross-generational TP=2 over PCIe 4.0 via dual-target multi-architecture fatbins.* | 14 min |
+| **MSN-013** | [b4](https://frieddeli.github.io/Portfolio-Website/#/blog/b4) | [Deploying vLLM on AMD Instinct MI50: 422 tok/s on Retired Enterprise Silicon](https://frieddeli.github.io/Portfolio-Website/#/blog/b4)<br/>*Continuous batching on Vega 20 inside unprivileged Proxmox LXC containers; saturating 88.6% of 1,024 GB/s HBM2 bandwidth.* | 12 min |
+| **MSN-004** | [b3](https://frieddeli.github.io/Portfolio-Website/#/blog/b3) | [Building This Site with Claude: Design Mockups to Production Architecture](https://frieddeli.github.io/Portfolio-Website/#/blog/b3)<br/>*Vite SPA pipeline, zero-dependency Markdown AST parser, static prerendering with jsdom, and LCARS design system.* | 8 min |
+| **MSN-002** | [b2](https://frieddeli.github.io/Portfolio-Website/#/blog/b2) | [One Node, Three GPUs, Ten Guests: Building the Home Proxmox Rack](https://frieddeli.github.io/Portfolio-Website/#/blog/b2)<br/>*PCIe topology, IOMMU grouping struggles, ACS overrides, vfio-pci binding, and unprivileged GPU container passthrough.* | 11 min |
+| **MSN-001** | [b1](https://frieddeli.github.io/Portfolio-Website/#/blog/b1) | [Qwen 3.5 on MI50: Tracking a Segfault to a Broken rocBLAS Kernel](https://frieddeli.github.io/Portfolio-Website/#/blog/b1)<br/>*Diagnosing illegal vector register addressing on Vega 20 gfx906 and rebuilding rocBLAS from source.* | 9 min |
 
 <br/>
 
